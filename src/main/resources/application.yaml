@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: back
+  datasource:
+    url: jdbc:mysql://10.0.0.158:3306/qiuqiu
+    username: root
+    password: Zhimeilideni990
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8888
+
+jwt:
+  expiration: 8640000
+  secret: adjioadioajdoiatr6zgadjnmaowjdoiaajoida
