@@ -33,7 +33,7 @@ public class UserController {
         if (loginVo != null) {
             return ResponseEntity.ok(Res.success(userService.login(loginDto)));
         }else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Res.error("账号或密码错误"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Res.error("账号或密码错误"));
         }
     }
 
