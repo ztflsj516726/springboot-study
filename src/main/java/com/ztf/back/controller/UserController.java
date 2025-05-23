@@ -5,6 +5,9 @@ import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.vo.LoginVo;
 import com.ztf.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,8 +28,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("login")
-    public Res userLogin(@RequestBody LoginDto loginDto) {
-        return Res.success(userService.login(loginDto));
+    public ResponseEntity<Res>  userLogin(@RequestBody LoginDto loginDto) {
+        LoginVo loginVo = userService.login(loginDto);
+        if (loginVo != null) {
+            return ResponseEntity.ok(Res.success(userService.login(loginDto)));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Res.error("账号或密码错误"));
+        }
     }
 
     @GetMapping("hi")
