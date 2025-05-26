@@ -1,6 +1,7 @@
 package com.ztf.back.controller;
 
 import com.ztf.back.common.Res;
+import com.ztf.back.common.UserContext;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
 import com.ztf.back.model.entity.User;
@@ -52,5 +53,9 @@ public class UserController {
     @GetMapping("hi")
     public Res Hi() {
         return Res.success("哈哈");
+    }
+    @GetMapping("userInfo")
+    public Res getUserInfo() {
+        return Res.success(userService.getUserInfo());
     }
 }

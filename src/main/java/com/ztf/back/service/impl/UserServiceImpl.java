@@ -1,6 +1,7 @@
 package com.ztf.back.service.impl;
 
 import ch.qos.logback.core.util.StringUtil;
+import com.ztf.back.common.UserContext;
 import com.ztf.back.exception.HandleException;
 import com.ztf.back.mapper.UserMapper;
 import com.ztf.back.model.dto.LoginDto;
@@ -66,6 +67,15 @@ public class UserServiceImpl implements UserService {
         System.out.println("user" + user);
         Long id = userMapper.register(user);
         user.setId(id);
+        return user;
+    }
+
+    @Override
+    public User getUserInfo() {
+        User user = userMapper.getUserInfo(UserContext.getUserId());
+        if (user == null) {
+            throw new HandleException("未查询到该用户");
+        }
         return user;
     }
 }

@@ -30,4 +30,7 @@ public interface UserMapper {
 
     @Select("select count(*) from users where username = #{username}")
     int existUsername(String username);
+
+    @Select("select * from users where  id = #{userId} limit 1")
+    User getUserInfo(String userId);
 }

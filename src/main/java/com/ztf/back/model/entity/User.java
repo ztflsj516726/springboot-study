@@ -10,6 +10,7 @@ package com.ztf.back.model.entity;
  * @Version 1.0
  */
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -35,8 +36,10 @@ public class User {
 
     private Integer status = 1;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private LocalDateTime createdAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private LocalDateTime updatedAt;
 
     @PrePersist

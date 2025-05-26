@@ -19,4 +19,6 @@ public interface UserService {
 
     User register(RegDto regDto);
 
+    User getUserInfo();
+
 }
