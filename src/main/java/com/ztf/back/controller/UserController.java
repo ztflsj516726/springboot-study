@@ -54,8 +54,18 @@ public class UserController {
     public Res Hi() {
         return Res.success("哈哈");
     }
+
     @GetMapping("userInfo")
     public Res getUserInfo() {
         return Res.success(userService.getUserInfo());
+    }
+
+    @PostMapping("updateInfo")
+    public Res updateUserInfo(@RequestBody User user) {
+        if (userService.updateUserInfo(user)) {
+            return Res.success("更新成功");
+        } else {
+            return Res.error("更新失败");
+        }
     }
 }

@@ -41,14 +41,14 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isEmpty(loginDto.getPassword())) {
             throw new HandleException("密码不能为空");
         }
+
         loginDto.setPassword(Md5Util.encryptPassword(loginDto.getPassword()));
         User user = userMapper.login(loginDto);
-        if (user != null) {
-            String token = jwtUtil.setToekn(user.getId().toString());
-            return LoginVo.builder().id(user.getId()).token(token).username(user.getUsername()).build();
-        } else {
-            return null;
+        if (user.getStatus() != 1) {
+            throw new HandleException("该用户被禁用");
         }
+        String token = jwtUtil.setToekn(user.getId().toString());
+        return LoginVo.builder().id(user.getId()).token(token).username(user.getUsername()).build();
     }
 
     @Override
@@ -77,5 +77,11 @@ public class UserServiceImpl implements UserService {
             throw new HandleException("未查询到该用户");
         }
         return user;
+    }
+
+    @Override
+    public Boolean updateUserInfo(User user) {
+        user.setId(Long.parseLong(UserContext.getUserId()));
+        return userMapper.UpdateUserInfo(user) > 0;
     }
 }

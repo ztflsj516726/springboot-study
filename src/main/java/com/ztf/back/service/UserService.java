@@ -21,4 +21,6 @@ public interface UserService {
 
     User getUserInfo();
 
+    Boolean updateUserInfo(User user);
+
 }

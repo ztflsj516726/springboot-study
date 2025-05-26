@@ -3,10 +3,7 @@ package com.ztf.back.mapper;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
 import com.ztf.back.model.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * ClassName:UserMapper
@@ -33,4 +30,8 @@ public interface UserMapper {
 
     @Select("select * from users where  id = #{userId} limit 1")
     User getUserInfo(String userId);
+
+    @Update("update users set username= #{username}, email= #{email}, phone= #{phone}, avatar= #{avatar}, status= #{status} where id = #{id}")
+    int UpdateUserInfo(User user);
+
 }
