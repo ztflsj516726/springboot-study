@@ -10,18 +10,21 @@ package com.ztf.back.model.entity;
  * @Version 1.0
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-
+@Builder
 public class User {
     private Long id;
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String email;

@@ -1,6 +1,8 @@
 package com.ztf.back.service;
 
 import com.ztf.back.model.dto.LoginDto;
+import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
 
 /**
@@ -15,5 +17,6 @@ import com.ztf.back.model.vo.LoginVo;
 public interface UserService {
     LoginVo login(LoginDto loginDto);
 
+    User register(RegDto regDto);
 
 }

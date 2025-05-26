@@ -2,6 +2,8 @@ package com.ztf.back.controller;
 
 import com.ztf.back.common.Res;
 import com.ztf.back.model.dto.LoginDto;
+import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
 import com.ztf.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,21 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("login")
-    public ResponseEntity<Res>  userLogin(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<Res> userLogin(@RequestBody LoginDto loginDto) {
         LoginVo loginVo = userService.login(loginDto);
         if (loginVo != null) {
-            return ResponseEntity.ok(Res.success(userService.login(loginDto)));
-        }else{
+            return ResponseEntity.ok(Res.success(loginVo));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Res.error("账号或密码错误"));
+        }
+    }
+
+    @PostMapping("register")
+    public ResponseEntity<Res> userRegister(@RequestBody RegDto regDto) {
+        User user = userService.register(regDto);
+        if (user != null) {
+            return ResponseEntity.ok(Res.success(user));
+        } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Res.error("账号或密码错误"));
         }
     }
