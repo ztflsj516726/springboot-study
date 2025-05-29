@@ -4,6 +4,7 @@ import com.ztf.back.common.Res;
 import com.ztf.back.common.UserContext;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.dto.UserListDto;
 import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
 import com.ztf.back.service.UserService;
@@ -67,5 +68,10 @@ public class UserController {
         } else {
             return Res.error("更新失败");
         }
+    }
+
+    @GetMapping("userList")
+    public Res getUserList(@ModelAttribute UserListDto userListDto) {
+        return Res.success(userService.getUserList(userListDto));
     }
 }

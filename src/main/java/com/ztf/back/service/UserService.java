@@ -1,9 +1,14 @@
 package com.ztf.back.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.dto.UserListDto;
 import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
+import com.ztf.back.util.PageInfoResult;
+
+import java.util.List;
 
 /**
  * ClassName:UserService
@@ -22,5 +27,7 @@ public interface UserService {
     User getUserInfo();
 
     Boolean updateUserInfo(User user);
+
+    PageInfoResult<User> getUserList(UserListDto userListDto);
 
 }

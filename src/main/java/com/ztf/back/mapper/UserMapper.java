@@ -2,8 +2,11 @@ package com.ztf.back.mapper;
 
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.dto.UserListDto;
 import com.ztf.back.model.entity.User;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 /**
  * ClassName:UserMapper
@@ -33,5 +36,7 @@ public interface UserMapper {
 
     @Update("update users set username= #{username}, email= #{email}, phone= #{phone}, avatar= #{avatar}, status= #{status} where id = #{id}")
     int UpdateUserInfo(User user);
+
+    List<User> userList();
 
 }

@@ -1,19 +1,24 @@
 package com.ztf.back.service.impl;
 
-import ch.qos.logback.core.util.StringUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ztf.back.common.UserContext;
 import com.ztf.back.exception.HandleException;
 import com.ztf.back.mapper.UserMapper;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
+import com.ztf.back.model.dto.UserListDto;
 import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
 import com.ztf.back.service.UserService;
 import com.ztf.back.util.JwtUtil;
 import com.ztf.back.util.Md5Util;
+import com.ztf.back.util.PageInfoResult;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * ClassName:UserServiceImpl
@@ -44,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
         loginDto.setPassword(Md5Util.encryptPassword(loginDto.getPassword()));
         User user = userMapper.login(loginDto);
+        if (user == null) {
+            throw new HandleException("账户或密码错误");
+        }
         if (user.getStatus() != 1) {
             throw new HandleException("该用户被禁用");
         }
@@ -83,5 +91,20 @@ public class UserServiceImpl implements UserService {
     public Boolean updateUserInfo(User user) {
         user.setId(Long.parseLong(UserContext.getUserId()));
         return userMapper.UpdateUserInfo(user) > 0;
+    }
+
+    @Override
+    public PageInfoResult<User> getUserList(UserListDto userListDto) {
+        // 启动分页
+        PageHelper.startPage(1,10);
+        // 查询用户列表
+        List<User> users = userMapper.userList();
+
+        // 使用 PageInfo 封装查询结果
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        System.out.println("pageInfo"+pageInfo);
+
+        // 返回分页结果
+        return new PageInfoResult<>(pageInfo);
     }
 }

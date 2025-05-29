@@ -15,10 +15,21 @@ server:
 
 jwt:
   expiration: 8640000
-  secret: adjioadioajdoiatr6zgadjnmaowjdoiaajoida
-
+  secret: radioastronomical6zgadjnmaowjdoiaajoida
+pagehelper:
+  dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ztf.back.model.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 logging:
   level:
-    com.zaxxer.hikari: WARN
-    org.springframework.jdbc.datasource: WARN
-    org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer: WARN
+    com:
+      ztf:
+        back:
+          mapper: debug
+
