@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfoResult<User> getUserList(UserListDto userListDto) {
         // 启动分页
-        PageHelper.startPage(1,10);
+        PageHelper.startPage(userListDto.getCurrent(),userListDto.getPageSize());
         // 查询用户列表
         List<User> users = userMapper.userList();
 

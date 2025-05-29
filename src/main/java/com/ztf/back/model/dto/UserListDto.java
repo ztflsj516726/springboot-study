@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class UserListDto {
 
-    private Integer pageNum = 1;
+    private Integer current = 1;
 
     private Integer pageSize = 10;
 }
