@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.Properties;
 
@@ -32,6 +33,7 @@ public class MyBatisConfig {
     }
 
     @Bean
+    @Order(0) // 设置高优先级
     public PageInterceptor pageInterceptor() {
         return new PageInterceptor();
     }
