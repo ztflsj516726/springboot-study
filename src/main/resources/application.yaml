@@ -17,9 +17,9 @@ jwt:
   expiration: 8640000
   secret: radioastronomical6zgadjnmaowjdoiaajoida
 pagehelper:
-  dialect: mysql
+  helperDialect: mysql
   reasonable: true
-  supportMethodsArguments: true
+  supportMethodsArguments: true  # 支持通过 Mapper 接口的方法参数来传递分页参数
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.ztf.back.model.entity

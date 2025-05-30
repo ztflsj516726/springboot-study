@@ -12,7 +12,7 @@ package com.ztf.back.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -42,13 +42,13 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private LocalDateTime updatedAt;
 
-    @PrePersist
+//    @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = createdAt;
     }
 
-    @PreUpdate
+//    @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
