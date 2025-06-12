@@ -96,15 +96,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfoResult<User> getUserList(UserListDto userListDto) {
         // 启动分页
-        PageHelper.startPage(userListDto.getCurrent(),userListDto.getPageSize());
+        PageHelper.startPage(userListDto.getCurrent(), userListDto.getPageSize());
         // 查询用户列表
         List<User> users = userMapper.userList();
 
         // 使用 PageInfo 封装查询结果
         PageInfo<User> pageInfo = new PageInfo<>(users);
-        System.out.println("pageInfo"+pageInfo);
+        System.out.println("pageInfo" + pageInfo);
 
         // 返回分页结果
         return new PageInfoResult<>(pageInfo);
+    }
+
+    @Override
+    public Boolean deleteUser(List<String> ids) {
+        return userMapper.deleteUser(ids) > 0;
     }
 }

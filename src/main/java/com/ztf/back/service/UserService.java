@@ -30,4 +30,6 @@ public interface UserService {
 
     PageInfoResult<User> getUserList(UserListDto userListDto);
 
+    Boolean deleteUser(List<String> ids);
+
 }

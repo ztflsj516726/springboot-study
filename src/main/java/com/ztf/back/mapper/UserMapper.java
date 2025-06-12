@@ -39,4 +39,5 @@ public interface UserMapper {
 
     List<User> userList();
 
+    int deleteUser(List<String> ids);
 }

@@ -1,18 +1,19 @@
 package com.ztf.back.controller;
 
 import com.ztf.back.common.Res;
-import com.ztf.back.common.UserContext;
 import com.ztf.back.model.dto.LoginDto;
 import com.ztf.back.model.dto.RegDto;
 import com.ztf.back.model.dto.UserListDto;
 import com.ztf.back.model.entity.User;
 import com.ztf.back.model.vo.LoginVo;
 import com.ztf.back.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ClassName:UserController
@@ -51,11 +52,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("hi")
-    public Res Hi() {
-        return Res.success("哈哈");
-    }
-
     @GetMapping("userInfo")
     public Res getUserInfo() {
         return Res.success(userService.getUserInfo());
@@ -73,5 +69,15 @@ public class UserController {
     @GetMapping("userList")
     public Res getUserList(@ModelAttribute UserListDto userListDto) {
         return Res.success(userService.getUserList(userListDto));
+    }
+
+    @PostMapping("deleteUser")
+    public Res deleteUser(@RequestBody List<String> ids) {
+        Boolean bol = userService.deleteUser(ids);
+        if (bol) {
+            return Res.error("删除成功");
+        } else {
+            return Res.success("删除失败");
+        }
     }
 }
